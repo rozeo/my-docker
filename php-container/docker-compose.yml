@@ -31,4 +31,4 @@ services:
       - './htdocs:/var/www/html'
 
     environment:
-      MYSQL_ROOT_PASSWORD: mysql-root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
