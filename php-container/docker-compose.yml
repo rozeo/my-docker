@@ -12,13 +12,20 @@ services:
       - './htdocs:/var/www/html'
 
   php-fpm:
-    image: 'php:7.4-fpm'
+    build:
+      context: 'dockerfiles/php-fpm/'
+      dockerfile: 'Dockerfile'
 
     volumes:
       - './htdocs:/var/www/html'
-      - './config/php:/usr/local/etc/php/conf.d'
+      - './config/php:/usr/local/etc/php/conf.d/setting.ini'
       # - './config/php-fpm:/usr/local/etc/php-fpm.d/'
       - './tmp/xdebug:/tmp/xdebug'
+   
+    environment:
+      DISCORD_ID: ${DISCORD_ID}
+      DISCORD_SECRET: ${DISCORD_SECRET}
+
 
   mysql:
     image: 'mysql:8.0'
