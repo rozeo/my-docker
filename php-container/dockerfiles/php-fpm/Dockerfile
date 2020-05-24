@@ -2,7 +2,8 @@ FROM php:7.4-fpm
 
 RUN apt update && \
     apt install -y \
-        libonig-dev
+        libonig-dev \
+        unzip
 
 RUN docker-php-ext-install pdo_mysql opcache
 
