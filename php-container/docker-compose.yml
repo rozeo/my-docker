@@ -27,8 +27,12 @@ services:
     environment:
       DISCORD_ID: ${DISCORD_ID}
       DISCORD_SECRET: ${DISCORD_SECRET}
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: discord_db
+      DB_USERNAME: root
       DB_PASSWORD: ${MYSQL_PASSWORD}
-
 
   mysql:
     image: 'mysql:8.0'
