@@ -3,8 +3,9 @@ version: '3'
 services:
   nginx:
     image: 'nginx:latest'
+    restart: always
     ports:
-      - '8080:80'
+      - '80:80'
 
     volumes:
       - './config/nginx/nginx.conf:/etc/nginx/nginx.conf'
@@ -12,23 +13,27 @@ services:
       - './htdocs:/var/www/html'
 
   php-fpm:
+    restart: always
     build:
       context: 'dockerfiles/php-fpm/'
       dockerfile: 'Dockerfile'
 
     volumes:
       - './htdocs:/var/www/html'
-      - './config/php:/usr/local/etc/php/conf.d/setting.ini'
+      - './config/php/default.ini:/usr/local/etc/php/conf.d/override.ini'
       # - './config/php-fpm:/usr/local/etc/php-fpm.d/'
       - './tmp/xdebug:/tmp/xdebug'
    
     environment:
       DISCORD_ID: ${DISCORD_ID}
       DISCORD_SECRET: ${DISCORD_SECRET}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
 
 
   mysql:
     image: 'mysql:8.0'
+
+    restart: always
 
     ports:
       - '3306:3306'

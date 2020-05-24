@@ -1,2 +1,3 @@
 secrets
-htdocs/**
+htdocs
+.env
